@@ -46,7 +46,7 @@ public class LoginController {
 
     //    @Autowired和@Resource都可以用来装配bean，都可以写在字段上，或者方法上。
     @Autowired(required = true)
-    private UserService userService1;
+    private UserService userServiceImpl1;
     @Autowired
     private SomeUtil somutil;
 
@@ -57,7 +57,7 @@ public class LoginController {
         LogTest logTest = new LogTest();
         logTest.start();
 
-        User user = userService1.getUserByName("yuyu");
+        User user = userServiceImpl1.getUserByName("yuyu");
 
         String xxooxxoo = somutil.getxxxxx();
         System.out.println(xxooxxoo);
