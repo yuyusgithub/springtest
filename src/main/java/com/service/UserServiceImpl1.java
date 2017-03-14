@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * Created by yuyu on 2016/10/19.
  */
 
-@Service("userService1")
+@Service("userServiceImpl1")
 public class UserServiceImpl1 implements UserService{
 
     @Autowired
