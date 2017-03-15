@@ -1,7 +1,8 @@
-package com.service;
+package com.service.impl;
 
 import com.bean.User;
 import com.dao.UserDao;
+import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,15 +10,12 @@ import org.springframework.stereotype.Service;
  * Created by yuyu on 2016/10/19.
  */
 
-@Service("userServiceImpl1")
-public class UserServiceImpl1 implements UserService{
+@Service("userServiceImpl")
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
     public User getUserByName(String userName) {
         return userDao.getUserByName(userName);
     }
-
-
-
 }

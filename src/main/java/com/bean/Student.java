@@ -13,7 +13,7 @@ public class Student {
 
     private String xxoo;
 
-    private Long teacherId;
+    private Teacher teacher;
 
     public Long getId() {
         return id;
@@ -47,11 +47,12 @@ public class Student {
         this.xxoo = xxoo;
     }
 
-    public Long getTeacherId() {
-        return teacherId;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
+
 }

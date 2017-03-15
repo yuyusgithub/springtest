@@ -1,5 +1,7 @@
 package com.bean;
 
+import java.util.Set;
+
 /**
  * Created by yuyu on 2016/10/19.
  */
@@ -9,9 +11,11 @@ public class Teacher {
 
     private String name;
 
-    private int age;
+    private Long age;
 
     private String clazz;
+
+    private Set<Student> students;
 
     public Long getId() {
         return id;
@@ -29,11 +33,11 @@ public class Teacher {
         this.name = name;
     }
 
-    public int getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 
@@ -43,5 +47,13 @@ public class Teacher {
 
     public void setClazz(String clazz) {
         this.clazz = clazz;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

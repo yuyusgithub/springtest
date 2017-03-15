@@ -1,6 +1,10 @@
 package com.controller;
 
+import com.bean.Student;
+import com.bean.Teacher;
 import com.bean.User;
+import com.service.StudentService;
+import com.service.TeacherService;
 import com.service.UserService;
 import com.tett.LogTest;
 import com.util.SomeUtil;
@@ -21,6 +25,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by yuyu on 2016/10/19.
@@ -46,18 +52,22 @@ public class LoginController {
 
     //    @Autowired和@Resource都可以用来装配bean，都可以写在字段上，或者方法上。
     @Autowired(required = true)
-    private UserService userServiceImpl1;
+    private UserService userServiceImpl;
+    @Autowired
+    private TeacherService teacherServiceImpl;
+    @Autowired
+    private StudentService studentServiceImpl;
     @Autowired
     private SomeUtil somutil;
 
 
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletRequest response, Model model) {
+        Teacher teacher =teacherServiceImpl.getTeacherById(1);
+        Set<Student> set = teacher.getStudents();
 
-        LogTest logTest = new LogTest();
-        logTest.start();
 
-        User user = userServiceImpl1.getUserByName("yuyu");
+        User user = userServiceImpl.getUserByName("yuyu");
 
         String xxooxxoo = somutil.getxxxxx();
         System.out.println(xxooxxoo);
