@@ -11,6 +11,11 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+  <servlet-mapping>
+    <servlet-name>rest</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring-core.xml,classpath:spring-hibernate.xml</param-value>
@@ -28,10 +33,7 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
 
-  <servlet-mapping>
-    <servlet-name>rest</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
+
 
 
 </web-app>

@@ -49,45 +49,43 @@
     <!-- ********************************在3.x的版本，可以通过这种配置被handlerAdapter配置一些消息解析器，用于自动转换json，或者xml什么的，在4.x的版本之后，这些东西都会默认注册，字符集默认utf-8******************-->
 
     <!--<bean class ="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >-->
-        <!--<property name="messageConverters">-->
-            <!--<list>-->
-                <!--<ref bean="stringHttpMessageConverter"></ref>-->
-                <!--<ref bean="mappingJackson2HttpMessageConverter"></ref>-->
-                <!--&lt;!&ndash;<ref bean="marshallingHttpMessageConverter"></ref>&ndash;&gt;-->
-            <!--</list>-->
-        <!--</property>-->
+    <!--<property name="messageConverters">-->
+    <!--<list>-->
+    <!--<ref bean="stringHttpMessageConverter"></ref>-->
+    <!--<ref bean="mappingJackson2HttpMessageConverter"></ref>-->
+    <!--&lt;!&ndash;<ref bean="marshallingHttpMessageConverter"></ref>&ndash;&gt;-->
+    <!--</list>-->
+    <!--</property>-->
     <!--</bean>-->
 
     <!--<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">-->
-        <!--<property name = "supportedMediaTypes">-->
-            <!--<list>-->
-                <!--<value>text/html;charset=UTF-8</value>-->
-            <!--</list>-->
-        <!--</property>-->
+    <!--<property name = "supportedMediaTypes">-->
+    <!--<list>-->
+    <!--<value>text/html;charset=UTF-8</value>-->
+    <!--</list>-->
+    <!--</property>-->
     <!--</bean>-->
 
     <!--<bean id="mappingJackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" >-->
-        <!--<property name="supportedMediaTypes">-->
-            <!--<list>-->
-                <!--<value>application/json;charset=UTF-8</value>-->
-            <!--</list>-->
-        <!--</property>-->
+    <!--<property name="supportedMediaTypes">-->
+    <!--<list>-->
+    <!--<value>application/json;charset=UTF-8</value>-->
+    <!--</list>-->
+    <!--</property>-->
     <!--</bean>-->
 
     <!--<bean id="marshallingHttpMessageConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter" >-->
-        <!--<property name="supportedMediaTypes">-->
-            <!--<list>-->
-                <!--<value>application/xml;charset=UTF-8</value>-->
-            <!--</list>-->
-        <!--</property>-->
-        <!--<property name = "defaultCharset">-->
-            <!--<value>UTF-8</value>-->
-        <!--</property>-->
+    <!--<property name="supportedMediaTypes">-->
+    <!--<list>-->
+    <!--<value>application/xml;charset=UTF-8</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--<property name = "defaultCharset">-->
+    <!--<value>UTF-8</value>-->
+    <!--</property>-->
     <!--</bean>-->
 
     <!--*****************************************结束**********************************************-->
-
-    <!-- 扫描service自动注入为bean -->
 
 
 

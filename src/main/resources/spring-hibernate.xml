@@ -10,28 +10,60 @@
                         http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context.xsd
 						">
-
+    <context:property-placeholder location="classpath:config-hibernate.properties,classpath:config-jdbc.properties"/>
+    <!--spring容器中最多只能定义一个context:property-placeholder-->
+    <!-- 扫描service自动注入为bean -->
 
     <!--配置C3P0连接池 bean-->
+    <!-- 如果使用jdbc进行连接的话，只要配置如下连接池就够了 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
-        <property name="driverClass" value="${jdbc.driver}" />
-        <property name="jdbcUrl" value="${jdbc.url}" />
-        <property name="user" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
 
         <!-- 请求超时时间 -->
-        <property name="checkoutTimeout" value="${checkoutTimeout}" />
+        <property name="checkoutTimeout" value="${checkoutTimeout}"/>
         <!-- 每60秒检查所有连接池中的空闲连接。默认值: 0，不检查 -->
-        <property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}" />
+        <property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}"/>
         <!-- 连接数据库连接池最大空闲时间 -->
-        <property name="maxIdleTime" value="${maxIdleTime}" />
+        <property name="maxIdleTime" value="${maxIdleTime}"/>
         <!-- 连接池初始化连接数 -->
-        <property name="initialPoolSize" value="${initialPoolSize}" />
-        <property name="minPoolSize" value="${minPoolSize}" />
-        <property name="maxPoolSize" value="${maxPoolSize}" />
+        <property name="initialPoolSize" value="${initialPoolSize}"/>
+        <property name="minPoolSize" value="${minPoolSize}"/>
+        <property name="maxPoolSize" value="${maxPoolSize}"/>
         <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。默认值: 3 -->
-        <property name="acquireIncrement" value="${acquireIncrement}" />
+        <property name="acquireIncrement" value="${acquireIncrement}"/>
     </bean>
+
+    <!-- 配置hibernate的SessionFactory -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <!-- 注入数据源 相关信息看源码 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- hibernate配置信息 -->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+
+                <!-- 开启二级缓存 ehcache -->
+                <!--<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>-->
+                <!--<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>-->
+                <!--<prop key="hibernate.cache.region.factory_class">${hibernate.cache.region.factory_class}</prop>-->
+                <!--<prop key="hibernate.cache.provider_configuration_file_resource_path">${hibernate.cache.provider_configuration_file_resource_path}-->
+                <!--</prop>-->
+            </props>
+        </property>
+        <!-- 扫描hibernate注解配置的entity -->
+        <!--<property name="packagesToScan" value="org.andy.work.entity" />-->
+    </bean>
+
+
+
+
 
 </beans>
