@@ -64,6 +64,7 @@
 
     </bean>
 
+    <tx:annotation-driven/>
     <!-- transaction manager -->
     <bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>
@@ -78,7 +79,7 @@
             <tx:method name="modify*" propagation="REQUIRED"/>
             <tx:method name="edit*" propagation="REQUIRED"/>
             <tx:method name="saveOrUpdate*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false"/>
 
             <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
             <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
@@ -86,7 +87,7 @@
             <tx:method name="search*" propagation="SUPPORTS" read-only="true"/>
 
             <!-- 其他采用默认事务方式 -->
-            <tx:method name="*" />
+            <tx:method name="*" propagation="REQUIRED" />
 
         </tx:attributes>
         <!--PROPAGATION_REQUIRED-->

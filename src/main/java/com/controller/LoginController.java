@@ -6,26 +6,16 @@ import com.bean.User;
 import com.service.StudentService;
 import com.service.TeacherService;
 import com.service.UserService;
-import com.tett.LogTest;
 import com.util.SomeUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -52,23 +42,53 @@ public class LoginController {
 
     //    @Autowired和@Resource都可以用来装配bean，都可以写在字段上，或者方法上。
     @Autowired(required = true)
-    private UserService userServiceImpl;
-    @Autowired
-    private TeacherService teacherServiceImpl;
-    @Autowired
-    private StudentService studentServiceImpl;
+    private UserService userService1;
+
+    @Autowired(required = true)
+    private TeacherService teacherService;
+
+    @Autowired(required = true)
+    private StudentService studentService;
     @Autowired
     private SomeUtil somutil;
 
-
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletRequest response, Model model) {
-        Teacher teacher =teacherServiceImpl.getTeacherById(1);
+
+        User user = userService1.getUserByName("yuyu");
+
+        Teacher teacher = teacherService.getTeacherById(1);
         Set<Student> set = teacher.getStudents();
+        try {
+            for(Student student : set){
+                System.out.println(student.getName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        teacherService.deleteById(2l);
+        studentService.deleteById(1l);
+        teacher.setAge(9l);
+        teacher.setName("dfdffdf");
+        Set<Student> studentList = new HashSet<Student>();
+        Student s1 = new Student();
+        s1.setName("1111");
+        s1.setAge(9);
+        s1.setXxoo("xxoo");
+        s1.setTeacher(teacher);
+        studentList.add(s1);
+        teacher.setStudents(studentList);
 
-
-        User user = userServiceImpl.getUserByName("yuyu");
-
+//        Student s2 = new Student();
+//        s2.setName("1111");
+//        s2.setAge(9);
+//        studentList.add(s1);
+//        studentList.add(s2);
+//        teacher.setStudents(studentList);
+//
+//        teacherService.addTeacher(teacher);
+        teacherService.addTeacher(teacher);
+//        studentService.add(s1);
         String xxooxxoo = somutil.getxxxxx();
         System.out.println(xxooxxoo);
 
@@ -83,9 +103,12 @@ public class LoginController {
         model.addAttribute("name", name);
         model.addAttribute("password", password);
         model.addAttribute("xxoo", testInjectStr);
-        Thread t = new Thread();
+
         return "/login";
     }
 
+    private void xxxx(){
+
+    }
 
 }
