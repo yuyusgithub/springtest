@@ -11,7 +11,7 @@
         <property name="age" column="age" type="long" />
         <property name="clazz" column="clazz" type="string" length="512" />
 
-        <set name="students" inverse="true" lazy="false" cascade="all" >
+        <set name="students"  lazy="false"  cascade="all" >  <!--inverse="true"-->
             <key column="teacher_id" />
             <one-to-many class="Student"/>
         </set>

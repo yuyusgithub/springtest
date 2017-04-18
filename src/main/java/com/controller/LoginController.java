@@ -3,9 +3,10 @@ package com.controller;
 import com.bean.Student;
 import com.bean.Teacher;
 import com.bean.User;
-import com.service.StudentService;
-import com.service.TeacherService;
-import com.service.UserService;
+import com.service.ICommonService;
+import com.service.IStudentService;
+import com.service.ITeacherService;
+import com.service.IUserService;
 import com.util.SomeUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,73 +42,102 @@ public class LoginController {
     //    private BaseDao baseDao;
 
     //    @Autowired和@Resource都可以用来装配bean，都可以写在字段上，或者方法上。
-    @Autowired(required = true)
-    private UserService userService1;
+    @Autowired
+    private IUserService userServiceImpl;
 
-    @Autowired(required = true)
-    private TeacherService teacherService;
+    @Autowired
+    private ITeacherService teacherServiceImpl;
 
-    @Autowired(required = true)
-    private StudentService studentService;
+    @Autowired
+    private IStudentService studentServiceImpl;
     @Autowired
     private SomeUtil somutil;
+    @Autowired
+    private ICommonService commonService;
+
+
 
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, HttpServletRequest response, Model model) {
+    public String login(String username, String password, HttpServletRequest request, HttpServletRequest response, Model model) {
 
-        User user = userService1.getUserByName("yuyu");
+        addTeacherAnaStudent();
 
-        Teacher teacher = teacherService.getTeacherById(1);
-        Set<Student> set = teacher.getStudents();
-        try {
-            for(Student student : set){
-                System.out.println(student.getName());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        teacherService.deleteById(2l);
-        studentService.deleteById(1l);
-        teacher.setAge(9l);
-        teacher.setName("dfdffdf");
-        Set<Student> studentList = new HashSet<Student>();
-        Student s1 = new Student();
-        s1.setName("1111");
-        s1.setAge(9);
-        s1.setXxoo("xxoo");
-        s1.setTeacher(teacher);
-        studentList.add(s1);
-        teacher.setStudents(studentList);
 
-//        Student s2 = new Student();
-//        s2.setName("1111");
-//        s2.setAge(9);
-//        studentList.add(s1);
-//        studentList.add(s2);
-//        teacher.setStudents(studentList);
-//
-//        teacherService.addTeacher(teacher);
-        teacherService.addTeacher(teacher);
-//        studentService.add(s1);
-        String xxooxxoo = somutil.getxxxxx();
-        System.out.println(xxooxxoo);
-
-        String name = request.getParameter("username");
-        String password = request.getParameter("password");
-        logger.error("test inject data" + testInjectStr);
-//        User user = userService.getUserByName("yuyu");
-        String xxx = "1212121";
-        String xxx1 = "1212121";
-        String xxx23 = "1212121";
-        String xxx3 = "1212121";
-        model.addAttribute("name", name);
         model.addAttribute("password", password);
         model.addAttribute("xxoo", testInjectStr);
 
         return "/login";
     }
 
-    private void xxxx(){
+    private String updateUser(String username, String password, HttpServletRequest response, Model model) {
+
+        User user = userServiceImpl.getUserByName(username);
+
+        String oldName = "";
+        String oldPassWord = "";
+        if(user != null){
+            oldName = user.getName();
+            oldPassWord = user.getPassword();
+        }
+
+        user.setName(username);
+        user.setPassword(password);
+
+
+
+
+
+//        model.addAttribute("name", name);
+        model.addAttribute("password", password);
+        model.addAttribute("xxoo", testInjectStr);
+
+
+        return null;
+
+
+    }
+
+    private void addTeacherAnaStudent(){
+//        clean();
+
+        Student s1 = new Student();
+        s1.setName("name1");
+        s1.setAge(9);
+        s1.setXxoo("xxoo");
+
+        Student s2 = new Student();
+        s2.setName("name1");
+        s2.setAge(9);
+        s2.setXxoo("xxoo");
+
+        Set<Student> set = new HashSet<Student>();
+        set.add(s1);
+        set.add(s2);
+
+        Teacher teacher = new Teacher();
+        teacher.setClazz("ooxx");
+        teacher.setName("tname1");
+        teacher.setAge(9l);
+//        teacherServiceImpl.addTeacher(teacher);
+
+
+//        Teacher t = teacherServiceImpl.getTeacherById(1);
+        teacher.setStudents(set);
+
+        teacherServiceImpl.addTeacher(teacher);
+
+
+        Teacher t1 = teacherServiceImpl.getTeacherById(1);
+        teacherServiceImpl.delete(t1);
+
+    }
+
+    private void clean(){
+
+//        commonService.clean(Student.class);
+
+        commonService.clean(Teacher.class);
+
 
     }
 

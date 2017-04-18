@@ -73,6 +73,19 @@ public class CommonDao {
         }
     }
 
+    public <T> void delete(T t){
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.delete(t);
+            session.flush();
+        } catch (HibernateException e) {
+            logger.error("dfdfdfdf",e);
+        } finally {
+            session.close();
+        }
+    }
+
     public <T> T getById(Class<T> clazz, String id) {
         Session session = null;
         T t = null;
@@ -114,5 +127,19 @@ public class CommonDao {
             session.close();
         }
         return list;
+    }
+
+    public void clean(Class clazz){
+        String hql = "delete "+clazz.getSimpleName();
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.createQuery(hql).executeUpdate();
+            session.flush();
+        } catch (HibernateException e) {
+            logger.error("dfdfdfdf",e);
+        } finally {
+            session.close();
+        }
     }
 }

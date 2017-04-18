@@ -1,19 +1,17 @@
 package com.service.impl;
 
 import com.bean.Student;
-import com.bean.Teacher;
 import com.dao.CommonDao;
-import com.service.StudentService;
+import com.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by yuyu on 2016/10/19.
  */
 
 @Service("studentServiceImpl")
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl implements IStudentService {
 
     @Autowired
     private CommonDao commonDao;

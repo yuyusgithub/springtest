@@ -49,4 +49,8 @@ public class UserDao {
         return user;
     }
 
+    public void updateUser(User user){
+
+    }
+
 }

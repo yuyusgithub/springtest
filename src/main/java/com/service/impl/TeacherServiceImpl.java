@@ -2,7 +2,7 @@ package com.service.impl;
 
 import com.bean.Teacher;
 import com.dao.CommonDao;
-import com.service.TeacherService;
+import com.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service("teacherServiceImpl")
-public class TeacherServiceImpl implements TeacherService {
+public class TeacherServiceImpl implements ITeacherService {
 
 
     @Autowired
@@ -27,5 +27,9 @@ public class TeacherServiceImpl implements TeacherService {
 
     public void deleteById(long id) {
         commonDao.deleteById(Teacher.class,id);
+    }
+
+    public void delete(Teacher teacher) {
+        commonDao.delete(teacher);
     }
 }
