@@ -24,6 +24,11 @@
         @Autowired,JSR 250's @PostConstruct, @PreDestroy and @Resource 等标注 -->
     <context:annotation-config/>
 
+
+
+
+
+
     <!--scan标签在拥有config标签的同时，可可以指定需要扫描的包的路径，以及指定扫描特定的标签，或者不扫描指定的标签-->
     <context:component-scan base-package="com">
         <context:exclude-filter type="annotation"
